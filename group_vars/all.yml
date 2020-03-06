@@ -1,0 +1,13 @@
+---
+
+common_packages:
+ - htop
+ - mc
+ - vim
+ - iotop
+ - iftop
+ - lsof
+ - curl
+ - wget
+ - rsync
+ - sysstat
