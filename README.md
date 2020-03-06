@@ -8,6 +8,10 @@
  - Funkcni SSH pripojeni
  - Ansible 2.9+
 
+#### Instalace pomoci ansible z Raspberry Pi
+Pokud nemate zadny jiny linux stroj, kde muze bezet ansible, je mozny delat to primo z raspberry pi.
+Pak je nutne nainstalovat balicky `apt-get install ansible sshpass`. Nasledne v local.ini zapisujete hosta jako `localhost`
+
 ### Instalace zakladniho systemu
  - predpoklada se Rpi s novym cistym image a funkcnim SSH
  - do souboru local.ini doplne IP adresu(y) zarizeni, ktere chcete instalovat
