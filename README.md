@@ -15,5 +15,11 @@
  - po vyzvani zadejte heslo (pravdepodobne vychozi pro uzivatele `pi`)
 
 
+### Priprava balicku dump1090-fa
+ - specialni role pro tvorbu balicku ze zdrojovych kodu
+ - nemusite spoustet na vsech prijimacich, staci si pripravit deb balicek na jednom
+ - urcena pouze pokud si nechcete prijimac zbytecne zaplacavat balickama pro build
+ - spustte build `ansible-playbook --ask-pass -i local.ini build_dump1090.yml`
+
 ### Instalace prijimace
  - TODO

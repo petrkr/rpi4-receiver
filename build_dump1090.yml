@@ -1,0 +1,13 @@
+---
+
+- name: Build Dump1090
+  hosts: builder
+
+  tasks:
+    - block:
+      - name: Install build environmet
+        apt:
+          name: 'git,build-essential,debhelper,librtlsdr-dev,pkg-config,dh-systemd,libncurses5-dev,libbladerf-dev'
+          state: present
+          update_cache: yes
+        become: yes
