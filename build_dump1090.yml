@@ -1,7 +1,11 @@
 ---
 
-- name: Build Dump1090
+- name: Buld dump1090
   hosts: builder
+  vars:
+    dump1090:
+      giturl: 'https://github.com/flightaware/dump1090/'
+      version: '3.8.0'
 
   tasks:
     - block:
@@ -11,3 +15,20 @@
           state: present
           update_cache: yes
         become: yes
+
+      - name: Build folder
+        file:
+          path: "$HOME/build"
+          state: directory
+
+      - name: Clone dump1090 sources from GIT
+        git:
+          dest: "$HOME/build/dump1090-fa"
+          repo: "{{ dump1090.giturl }}"
+          version: "v{{ dump1090.version }}"
+
+      - name: Build package
+        command:
+          chdir: "$HOME/build/dump1090-fa"
+          cmd: "dpkg-buildpackage -b --no-sign -j3"
+          creates: "$HOME/build/dump1090-fa_{{dump1090.version}}_armhf.deb"
