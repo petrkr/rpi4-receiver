@@ -1,0 +1,34 @@
+---
+
+- name: Buld MLAT-Clinet
+  hosts: builder
+  vars:
+    mlat_client:
+      giturl: 'https://github.com/mutability/mlat-client'
+      version: '0.2.9'
+
+  tasks:
+    - block:
+      - name: Install build environmet
+        apt:
+          name: 'git,build-essential,python3-dev'
+          state: present
+          update_cache: yes
+        become: yes
+
+      - name: Build folder
+        file:
+          path: "$HOME/build"
+          state: directory
+
+      - name: Clone MLAT Client sources from GIT
+        git:
+          dest: "$HOME/build/mlat-client"
+          repo: "{{ mlat_client.giturl }}"
+          version: "v{{ mlat_client.version }}"
+
+      - name: Build package
+        command:
+          chdir: "$HOME/build/mlat-client"
+          cmd: "dpkg-buildpackage -b --no-sign -j3"
+          creates: "$HOME/build/mlat-client_{{mlat_client.version}}_armhf.deb"
